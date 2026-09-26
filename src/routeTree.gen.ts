@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CafeRouteImport } from './routes/cafe'
+import { Route as CorporateRouteImport } from './routes/corporate'
 import { Route as HampersRouteImport } from './routes/hampers'
 import { Route as OccasionRouteImport } from './routes/occasion'
 
@@ -19,9 +21,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CafeRoute = CafeRouteImport.update({
   id: '/cafe',
   path: '/cafe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateRoute = CorporateRouteImport.update({
+  id: '/corporate',
+  path: '/corporate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HampersRoute = HampersRouteImport.update({
@@ -37,34 +49,49 @@ const OccasionRoute = OccasionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
   '/hampers': typeof HampersRoute
   '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
   '/hampers': typeof HampersRoute
   '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
   '/hampers': typeof HampersRoute
   '/occasion': typeof OccasionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cafe' | '/hampers' | '/occasion'
+  fullPaths: '/' | '/about' | '/cafe' | '/corporate' | '/hampers' | '/occasion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cafe' | '/hampers' | '/occasion'
-  id: '__root__' | '/' | '/cafe' | '/hampers' | '/occasion'
+  to: '/' | '/about' | '/cafe' | '/corporate' | '/hampers' | '/occasion'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/cafe'
+    | '/corporate'
+    | '/hampers'
+    | '/occasion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CafeRoute: typeof CafeRoute
+  CorporateRoute: typeof CorporateRoute
   HampersRoute: typeof HampersRoute
   OccasionRoute: typeof OccasionRoute
 }
@@ -78,11 +105,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cafe': {
       id: '/cafe'
       path: '/cafe'
       fullPath: '/cafe'
       preLoaderRoute: typeof CafeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate': {
+      id: '/corporate'
+      path: '/corporate'
+      fullPath: '/corporate'
+      preLoaderRoute: typeof CorporateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hampers': {
@@ -104,7 +145,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CafeRoute: CafeRoute,
+  CorporateRoute: CorporateRoute,
   HampersRoute: HampersRoute,
   OccasionRoute: OccasionRoute,
 }
