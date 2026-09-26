@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CafeRouteImport } from './routes/cafe'
+import { Route as HampersRouteImport } from './routes/hampers'
+import { Route as OccasionRouteImport } from './routes/occasion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CafeRoute = CafeRouteImport.update({
+  id: '/cafe',
+  path: '/cafe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HampersRoute = HampersRouteImport.update({
+  id: '/hampers',
+  path: '/hampers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OccasionRoute = OccasionRouteImport.update({
+  id: '/occasion',
+  path: '/occasion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cafe': typeof CafeRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cafe': typeof CafeRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cafe': typeof CafeRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cafe' | '/hampers' | '/occasion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cafe' | '/hampers' | '/occasion'
+  id: '__root__' | '/' | '/cafe' | '/hampers' | '/occasion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CafeRoute: typeof CafeRoute
+  HampersRoute: typeof HampersRoute
+  OccasionRoute: typeof OccasionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cafe': {
+      id: '/cafe'
+      path: '/cafe'
+      fullPath: '/cafe'
+      preLoaderRoute: typeof CafeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hampers': {
+      id: '/hampers'
+      path: '/hampers'
+      fullPath: '/hampers'
+      preLoaderRoute: typeof HampersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/occasion': {
+      id: '/occasion'
+      path: '/occasion'
+      fullPath: '/occasion'
+      preLoaderRoute: typeof OccasionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CafeRoute: CafeRoute,
+  HampersRoute: HampersRoute,
+  OccasionRoute: OccasionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
