@@ -10,33 +10,90 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CafeRouteImport } from './routes/cafe'
+import { Route as CorporateRouteImport } from './routes/corporate'
+import { Route as HampersRouteImport } from './routes/hampers'
+import { Route as OccasionRouteImport } from './routes/occasion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CafeRoute = CafeRouteImport.update({
+  id: '/cafe',
+  path: '/cafe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateRoute = CorporateRouteImport.update({
+  id: '/corporate',
+  path: '/corporate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HampersRoute = HampersRouteImport.update({
+  id: '/hampers',
+  path: '/hampers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OccasionRoute = OccasionRouteImport.update({
+  id: '/occasion',
+  path: '/occasion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cafe': typeof CafeRoute
+  '/corporate': typeof CorporateRoute
+  '/hampers': typeof HampersRoute
+  '/occasion': typeof OccasionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about' | '/cafe' | '/corporate' | '/hampers' | '/occasion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/cafe' | '/corporate' | '/hampers' | '/occasion'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/cafe'
+    | '/corporate'
+    | '/hampers'
+    | '/occasion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CafeRoute: typeof CafeRoute
+  CorporateRoute: typeof CorporateRoute
+  HampersRoute: typeof HampersRoute
+  OccasionRoute: typeof OccasionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +105,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cafe': {
+      id: '/cafe'
+      path: '/cafe'
+      fullPath: '/cafe'
+      preLoaderRoute: typeof CafeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate': {
+      id: '/corporate'
+      path: '/corporate'
+      fullPath: '/corporate'
+      preLoaderRoute: typeof CorporateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hampers': {
+      id: '/hampers'
+      path: '/hampers'
+      fullPath: '/hampers'
+      preLoaderRoute: typeof HampersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/occasion': {
+      id: '/occasion'
+      path: '/occasion'
+      fullPath: '/occasion'
+      preLoaderRoute: typeof OccasionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CafeRoute: CafeRoute,
+  CorporateRoute: CorporateRoute,
+  HampersRoute: HampersRoute,
+  OccasionRoute: OccasionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
